@@ -4,7 +4,8 @@ RPROMPT='%~'
 alias c='clear'
 alias pip='pip3'
 alias python='python3'
-alias config="vim ~/.zshrc"
+alias zconfig="vim ~/.zshrc"
+alias vconfig="vim ~/.vimrc"
 
 # Enable 256 color
 export TERM="xterm-256color"
