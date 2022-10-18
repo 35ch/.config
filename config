@@ -1,82 +1,39 @@
-### Variables
-set $mod Mod4
+# Variables
+set $wallpaper ~/Downloads/bg.jpg
 
-set $wallpaper ~/Downloads/Anime-Girl-Circuit-Board-Anime-фэндомы-удалённое-6154851.jpeg
+set $t #00000000
 
-set $term kitty
-set $menu fuzzel
-
-## Workspaces
-set $ws1 1
-set $ws2 2
-set $ws3 3
-set $ws4 4
-set $ws5 5
-set $ws6 6
-set $ws7 7
-
-### Font
+# Font
 font pango:Unifont 12
 
-### Gaps and borders
-default_border pixel 0
+# Gaps
+default_border pixel 6
 
-### Output
+#						border background text indicator child borders			
+client.focused		    $t     $t         $t   $t        $t
+client.unfocused        $t     $t         $t   $t        $t
+client.focused_inactive $t     $t         $t   $t        $t	
+
+# Keyboard Layout
+input "type:keyboard" {
+	xkb_layout se
+	}
+
+# Wallpaper
 output * bg $wallpaper fill
 
-### Key bindings
-bindsym $mod+Return exec $term
-bindsym $mod+d exec $menu
-
-bindsym $mod+q kill
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exit
-
-bindsym $mod+Escape exec reboot
-bindsym $mod+Shift+Escape exec poweroff
-
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
-bindsym XF86AudioLowerVolume exec amixer set Master 5%-
-bindsym XF86AudioMute exec amixer set Master 0
-
-### Status Bar
+# Status Bar
 bar {
     position top
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while $HOME/.config/sway/swaybar.sh; do sleep 1; done
-
     colors {
-        statusline #FFFFFF00
-        background #282828E6
-        inactive_workspace #323232E6 #323232E6 #FFFFFF00
-        focused_workspace #282828E6 #282828E6 #FFFFFF00
+		statusline $t
+		background #282828E4
+    	inactive_workspace #323232E4 #323232E4 $t 
+    	focused_workspace #282828E4 #282828E4 $t
     }
+
+    status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
 }
 
-include /etc/sway/config.d/*
+include keybinds.sh
