@@ -1,38 +1,39 @@
-# Variables
-set $wallpaper ~/Downloads/bg.jpg
-
+set $wallpaper ~/Downloads/circuit.jpeg
 set $t #00000000
 
-# Font
 font pango:Unifont 12
 
-# Gaps
-default_border pixel 6
+default_border pixel 4
 
-#						border background text indicator child borders			
-client.focused		    $t     $t         $t   $t        $t
-client.unfocused        $t     $t         $t   $t        $t
-client.focused_inactive $t     $t         $t   $t        $t	
+# class                 border background text indicator
+client.focused          $t     $t         $t   $t        
+client.focused_inactive $t     $t         $t   $t         
+client.unfocused        $t     $t         $t   $t       
+client.urgent           $t     $t         $t   $t      
+client.placeholder      $t     $t         $t   $t       
+client.background       $t     $t         $t   $t        
 
-# Keyboard Layout
 input "type:keyboard" {
-	xkb_layout se
-	}
+    xkb_layout se
+}
 
-# Wallpaper
 output * bg $wallpaper fill
 
-# Status Bar
 bar {
     position top
+    gaps 4
 
-    colors {
-		statusline $t
-		background #282828E4
-    	inactive_workspace #323232E4 #323232E4 $t 
-    	focused_workspace #282828E4 #282828E4 $t
+    colors {               
+        statusline         $t
+	background         #303438
+
+#                          border  background text	
+        active_workspace   $t      $t         #303438
+	focused_workspace  $t      $t         #303438
+	urgent_workspace   $t      $t         #303438
+	inactive_workspace #303438 #303438    #dfe5eb
     }
-
+    
     status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
 }
 
