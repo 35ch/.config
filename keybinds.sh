@@ -1,6 +1,6 @@
 set $mod Mod4
-set $term kitty
-set $menu wofi -c ~/.config/wofi/config -s ~/.config/wofi/style.css
+set $term foot
+set $menu fuzzel
 
 floating_modifier $mod
 
