@@ -1,15 +1,16 @@
-set $wallpaper ~/Downloads/bg.jpg
+set $wallpaper ~/Downloads/bg.png
 set $t #00000000
 
-font pango:Unifont 12
+font pango:cozette bold 11
 
-default_border pixel 2
+
+default_border pixel 0
 
 # class                 border  background text    indicator
-client.focused          #69a9c6 #69a9c6    #69a9c6 #69a9c6      
-client.focused_inactive #42484d #42484d    #42484d #42484d      
-client.unfocused        #303438 #303438    #303438 #303438   
-client.urgent           #cc6655 #cc6655    #cc6655 #cc6655 
+client.focused          $t      $t         $t      $t    
+client.focused_inactive #333436 #333436    #333436 #333436     
+client.unfocused        $t      $t         $t      $t
+client.urgent           #853739 #853739    #853739 #853739
 client.placeholder      $t      $t         $t      $t       
 client.background       $t      $t         $t      $t        
 
@@ -19,15 +20,15 @@ bar {
 	position top
 
 	colors {               
-		statusline         #dfe5eb
-		background         #303438
+		statusline         #d0d7dd
+		background         #333436e4
 
-#                          border  background text	
-		active_workspace   #42484d #42484d    #dfe5eb
-		focused_workspace  #69a9c6 #69a9c6    #303438
-		urgent_workspace   #cc6655 #cc6655    #303438
-		inactive_workspace #303438 #303438    #dfe5eb
+#                                  border    background text	
+		active_workspace   #333436e4 #333436e4  #d0d7dd
+		focused_workspace  #333436e4 #333436e4  #854f8c
+		urgent_workspace   #853739   #853739    #333436e4
+		inactive_workspace #333436e4 #333436e4  #d0d7dd
 		}
-																	   
+																	  
 		status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
 }
