@@ -1,10 +1,11 @@
-date=$(date +"%B %d %Y")
+date=$(date +"%Y-%m-%d")
 time=$(date +"%T")
-vol=$(pamixer --get-volume-human)
-ram=$(free | grep Mem | awk '{printf "%.0f\n", $3/$2 *100}')
+vol=$(pactl list sinks | grep Volym: | awk '{print $5}')
+ram=$(free | grep Minne | awk '{printf "%.0f\n", $3/$2 *100}')
 mem=$(df -h | grep /dev/nvme0n1p2 | awk '{print $5}')
-wifi_str=$(nmcli d wifi | grep "^\*" | grep -v "\*.*SSID" | awk '{ print $8}')
-#bat=$(cat /sys/class/power_supply/BAT0/capacity)
+wifi_str=$(iw dev wlp5s0 station dump | grep signal: | awk '{print $2*-1}')
+pkgs=$(xbps-query -l | awk 'END {print NR}')
+uptime=$(uptime | awk '{print substr($3, 1, length($3)-1)}')
 
 if [ $wifi_str -le 12 ]
 then
@@ -42,4 +43,4 @@ else
 
 fi	
 
-echo "$date | $time | VOL: $vol | RAM: $ram% | MEM: $mem | $wifi "
+echo "$date | $time | UP: $uptime | VOL: $vol | RAM: $ram% | MEM: $mem | PKGS: $pkgs | $wifi "
