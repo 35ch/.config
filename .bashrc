@@ -10,7 +10,6 @@ HISTFILESIZE=10000
 HISTCONTROL=ignoreboth
 
 alias ls="ls --color=auto"
-alias nf="clear;neofetch"
 
 ResetColor="\e[0m"
 Black="\e[30m"
