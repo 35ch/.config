@@ -43,4 +43,4 @@ else
 
 fi	
 
-echo "$date | $time | UP: $uptime | VOL: $vol | RAM: $ram% | MEM: $mem | PKGS: $pkgs | $wifi "
+echo "$date | $time | UP: $uptime | RAM: $ram% | MEM: $mem | PKGS: $pkgs | $wifi "
