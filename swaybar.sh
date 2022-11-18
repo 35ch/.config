@@ -1,11 +1,9 @@
 date=$(date +"%Y-%m-%d")
 time=$(date +"%T")
-vol=$(pactl list sinks | grep Volym: | awk '{print $5}')
-ram=$(free | grep Minne | awk '{printf "%.0f\n", $3/$2 *100}')
-mem=$(df -h | grep /dev/nvme0n1p2 | awk '{print $5}')
+ram=$(free | grep Mem | awk '{printf "%.0f\n", $3/$2 *100}')
 wifi_str=$(iw dev wlp5s0 station dump | grep signal: | awk '{print $2*-1}')
-pkgs=$(xbps-query -l | awk 'END {print NR}')
-uptime=$(uptime | awk '{print substr($3, 1, length($3)-1)}')
+inst=$(xbps-query -l | awk 'END {print NR}')
+upd=$(xbps-install -Sun | awk "/a/{++cnt} END {print cnt}")
 
 if [ $wifi_str -le 12 ]
 then
@@ -39,8 +37,13 @@ then
 	wifi="▁▂▃▄▅▆▇▉"
 
 else
-	wifi="NO WIFI"
+	wifi="NO CONNECTION"
 
 fi	
 
-echo "$date | $time | UP: $uptime | RAM: $ram% | MEM: $mem | PKGS: $pkgs | $wifi "
+if [ upd="" ]
+then
+	upd="0"
+fi
+
+echo "( XBPS: $inst packages installed, $upd ready to update ( RAM: $ram% ( $time ( $date ) $wifi "
