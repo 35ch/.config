@@ -2,8 +2,8 @@ date=$(date +"%Y-%m-%d")
 time=$(date +"%T")
 ram=$(free | grep Mem | awk '{printf "%.0f\n", $3/$2 *100}')
 wifi_str=$(iw dev wlp5s0 station dump | grep signal: | awk '{print $2*-1}')
-inst=$(xbps-query -l | awk 'END {print NR}')
-upd=$(xbps-install -Sun | awk "/a/{++cnt} END {print cnt}")
+inst=$(xbps-query -l | awk "END {print NR}")
+upd=$(xbps-install -Sun | awk "END {print NR}")
 
 if [ $wifi_str -le 12 ]
 then
@@ -38,12 +38,6 @@ then
 
 else
 	wifi="NO CONNECTION"
-
 fi	
 
-if [ upd="" ]
-then
-	upd="0"
-fi
-
-echo "( XBPS: $inst packages installed, $upd ready to update ( RAM: $ram% ( $time ( $date ) $wifi "
+echo "( XBPS: $inst installed, $upd updates ( RAM: $ram% ( $time ( $date ) $wifi "
