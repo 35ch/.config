@@ -10,3 +10,4 @@ input "type:keyboard" {
 
 include theme.sh
 include keybinds.sh
+include wallpaper.sh
