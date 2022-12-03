@@ -36,4 +36,6 @@ bindsym --to-code {
 	$mod+Shift+4 move window to workspace 4; workspace 4
 	$mod+Shift+5 move window to workspace 5; workspace 5
 	$mod+Shift+6 move window to workspace 6; workspace 6
+	
+	$mod+Shift+space floating toggle
 }
