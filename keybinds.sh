@@ -1,20 +1,22 @@
 set $mod Mod4
 set $term foot
 set $menu fuzzel
+set $browser firefox
 
 floating_modifier $mod
 
 bindsym --to-code {
     $mod+Return exec $term
     $mod+d exec $menu
-
+    $mod+b exec $browser
+	
     $mod+q kill
 	$mod+Shift+c reload
 	$mod+Shift+e exit
 
 	$mod+Escape exec reboot
 	$mod+Shift+Escape exec poweroff
-	$mod+Shift+s exec systemctl suspend
+	$mod+Shift+s exec loginctl suspend
 
 	$mod+f fullscreen
 
