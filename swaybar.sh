@@ -67,4 +67,4 @@ wifi_bars() {
 	write $wifi
 }
 
-echo "$(local_ip_adress) $(updates_available) $(ram_usage) $(cpu_temperature) $(year_and_date) $(current_time) $(wifi)"
+echo "$(updates_available) $(ram_usage) $(cpu_temperature) $(year_and_date) $(current_time) $(wifi_bars)"
