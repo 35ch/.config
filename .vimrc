@@ -1,48 +1,40 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'vbe0201/vimdiscord'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-set nospell
-set smartcase
-set nobackup
-set noswapfile
-set nowritebackup
-set wildmenu
-set autoindent
 set number
+set nowrap
+set nospell
 set belloff=all
 set tabstop=4
+set hid
 
-" Show the mode you are on the last line.
-set showmode
+set nobackup
+set nowb
+set noswapfile
 
-syntax on
+set showmatch
+
+syntax enable
+filetype plugin on
 
 set background=dark
 
-colorscheme seashell
+hi LineNR ctermfg=grey
+hi EndOfBuffer ctermfg=black
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+" Display all matching files when we tab complete
+set wildmenu
+
+" File browsing
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 12
+
+augroup SpawnNetrw
+    autocmd!
+    autocmd VimEnter * :Vexplore
+    autocmd VimEnter * wincmd w
+augroup END
