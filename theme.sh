@@ -3,7 +3,7 @@ set $bg     #363739
 set $fg     #babcbf
 set $red    #ca5a5a
 
-font pango:Cozette Bold 11
+font pango:Cozette 11
 
 default_border pixel 6
 
