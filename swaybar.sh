@@ -1,35 +1,27 @@
 #!/bin/bash
 
-write () {
-	echo "$1 |" 
-}
-
 year_and_date() {
-	write "$(date +"%Y-%m-%d")"
+	echo " $(date +"%Y-%m-%d")"
 }
 
 current_time() {
-	write "$(date +"%H:%M:%S")"
+	echo " $(date +"%H:%M:%S")"
 }
 
 ram_usage() {
-	write "RAM: $(free -b | head -n 2 | tail -1 | awk '{printf "%.0f\n", $3/$2 * 100}')%"
+	echo "RAM: $(free -b | head -n 2 | tail -1 | awk '{printf "%.0f\n", $3/$2 * 100}')%"
 }
 
 packages_installed() {
-	write $(xbps-query -l | awk "END {print NR}")
+	echo "$(xbps-query -l | awk "END {print NR}") installed"
 }
 
 updates_available() { 
-	write "XBPS: $(xbps-install -Mun | awk "END {print NR}") updates"
-}
-
-local_ip_adress() {
-	write "$(wpa_cli status | tail -5 | head -n 1 | cut -c 12-)"
+	echo "$(xbps-install -Mun | awk "END {print NR}") updates"
 }
 
 cpu_temperature() {
-	write "CPU: $(cat /sys/devices/platform/eeepc-wmi/hwmon/hwmon3/subsystem/hwmon2/temp1_input | awk '{printf "%.0f\n", $1/1000}')°C"
+	echo " $(cat /sys/devices/platform/eeepc-wmi/hwmon/hwmon3/subsystem/hwmon2/temp1_input | awk '{printf "%.0f\n", $1/1000}')°C"
 } 
 
 wifi() {
@@ -38,8 +30,10 @@ wifi() {
 	else
 		local wifi="睊"
 	fi
+	
+	wifi+=" $(wpa_cli SIGNAL_POLL | head -n 2 | tail -1 | cut -c 7-)%"
 
-	write "$wifi"
+	echo $wifi
 }
 
 wifi_bars() {
@@ -64,7 +58,7 @@ wifi_bars() {
 		done
 	fi
 
-	write $wifi
+	echo $wifi
 }
 
-echo "$(updates_available) $(ram_usage) $(cpu_temperature) $(year_and_date) $(current_time) $(wifi_bars)"
+echo "$(packages_installed) $(updates_available) $(ram_usage) $(cpu_temperature) $(year_and_date) $(current_time) $(wifi) "
