@@ -5,15 +5,12 @@ year_and_date() {
 }
 
 current_time() {
-	echo " $(date +"%H:%M:%S")"
+	echo " $(date +"%H:%M")"
 }
 
 ram_usage() {
-	echo "RAM: $(free -b | head -n 2 | tail -1 | awk '{printf "%.0f\n", $3/$2 * 100}')%"
-}
-
-packages_installed() {
-	echo "$(xbps-query -l | awk "END {print NR}") installed"
+	ram_used=$(free | awk 'NR==2{printf "%.0f\n", $3/$2*10}')
+	echo $(printf '█%.0s' $(seq 1 $ram_used))$(printf '░%.0s' $(seq $ram_used 10))
 }
 
 updates_available() { 
@@ -21,7 +18,7 @@ updates_available() {
 }
 
 cpu_temperature() {
-	echo " $(cat /sys/devices/platform/eeepc-wmi/hwmon/hwmon3/subsystem/hwmon2/temp1_input | awk '{printf "%.0f\n", $1/1000}')°C"
+	echo " $(awk '{printf "%.0f\n", $1/1000}' /sys/devices/platform/eeepc-wmi/hwmon/hwmon3/subsystem/hwmon2/temp1_input)°C"
 } 
 
 wifi() {
@@ -31,34 +28,9 @@ wifi() {
 		local wifi="睊"
 	fi
 	
-	wifi+=" $(wpa_cli SIGNAL_POLL | head -n 2 | tail -1 | cut -c 7-)%"
+	wifi+=" $(wpa_cli SIGNAL_POLL | awk 'NR==2{print $1}' | cut -c 7-)%"
 
 	echo $wifi
 }
 
-wifi_bars() {
-	wifi_signal=$(iw dev wlp5s0 station dump | grep signal: | awk '{print $2*-1}')
-	
-	if [[ $wifi_signal == "" ]]; then
-		local wifi="Not connected"
-	else
-		bars=("▁" "▂" "▃" "▄" "▅" "▆" "▇" "▉")
-
-		# Half-up rounding wifi_str/12
-		wifi_eight=$(( ($wifi_signal + 12 / 2 ) / 12 ))
-
-		wifi=${bars[$wifi_eight]}
-	
-		for i in {1..8}; do
-			if (($wifi_eight-$i < 0)); then
-				wifi+=${bars[0]}
-			else
-				wifi+=${bars[$wifi_eight-$i]}
-			fi
-		done
-	fi
-
-	echo $wifi
-}
-
-echo "$(packages_installed) $(updates_available) $(ram_usage) $(cpu_temperature) $(year_and_date) $(current_time) $(wifi) "
+echo "$(updates_available) $(cpu_temperature) $(year_and_date) $(current_time) $(wifi) $(ram_usage) "
