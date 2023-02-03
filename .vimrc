@@ -37,4 +37,5 @@ augroup SpawnNetrw
     autocmd!
     autocmd VimEnter * :Vexplore
     autocmd VimEnter * wincmd w
+	autocmd BufLeave * :qa
 augroup END
