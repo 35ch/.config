@@ -5,7 +5,7 @@ exec firefox
 exec steam
 
 input "type:keyboard" {
-    xkb_layout us
+    xkb_layout se
 }
 
 include theme.sh
