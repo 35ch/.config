@@ -7,7 +7,7 @@ This is mostly for my own use but I do recommend all the programs listed and you
 - polkit
 - mesa-dri
 - font-cozette
-- pulseaudio
+- pulseaudio (https://unix.stackexchange.com/questions/513489/buzzing-when-not-playing)
 - bluez-utils
 - git
 
