@@ -1,9 +1,10 @@
-set $t      #00000000
-set $bg     #363739
-set $fg     #babcbf
-set $red    #ca5a5a
+set $t   #00000000
+set $bg  #363739
+set $fg  #babcbf
+set $red #ca5a5a
+set $blu #588bb6
 
-font pango:Cozette 11
+font pango:cozette 11
 
 default_border pixel 6
 
@@ -16,19 +17,19 @@ client.urgent           $t      $t         $t      $t
 
 bar {
 	position top
-    
+	
 	gaps 6
 
 	colors {               
 		statusline         $fg
 		background         $bg
 
-#                          border    background text	
-		active_workspace   $bg       $bg        $t
-		focused_workspace  $bg       $bg        $fg
-		urgent_workspace   $red      $red       $red
+#       class              border    background text	
+		active_workspace   $bg       $bg        $fg
+		focused_workspace  $bg       $bg        $blu
+		urgent_workspace   $red      $red       $fg
 		inactive_workspace $bg       $bg        $t
-		}
+	}
 	
-		status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
+	status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
 }
