@@ -1,11 +1,6 @@
-assign [class="Firefox"] 1
-assign [class="Steam"] 2 
-
-exec firefox
-exec steam
-
 input "type:keyboard" {
-    xkb_layout se
+    xkb_layout se(mac),jp
+	xkb_options "caps:super, altwin:swap_lalt_lwin"
 }
 
 include theme.sh
