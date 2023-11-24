@@ -11,7 +11,8 @@ bindsym --to-code {
     $mod+b exec $browser
 	
     $mod+q kill
-	$mod+Shift+c reload
+    $mod+Shift+q pkill window
+	$mod+Shift+r reload
 	$mod+Shift+e exit
 
 	$mod+Escape exec reboot
@@ -20,10 +21,8 @@ bindsym --to-code {
 
 	$mod+f fullscreen
 
-	$mod+Left focus left
-	$mod+Down focus down
-	$mod+Up focus up
-	$mod+Right focus right
+	$mod+Shift+a move workspace to output left
+	$mod+a move window to output left
 
 	$mod+1 workspace 1
 	$mod+2 workspace 2
@@ -38,6 +37,8 @@ bindsym --to-code {
 	$mod+Shift+4 move window to workspace 4; workspace 4
 	$mod+Shift+5 move window to workspace 5; workspace 5
 	$mod+Shift+6 move window to workspace 6; workspace 6
-	
+
 	$mod+Shift+space floating toggle
+
+#	$mod+Tab exec swaymsg input type:keyboard xkb_switch_layout next
 }
