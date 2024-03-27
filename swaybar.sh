@@ -1,25 +1,29 @@
 #!/bin/bash
 
-year_and_date() {
-	echo "$(date +"%Y-%m-%d")"
+todays_date() {
+	echo $(date +"%x")
 }
 
 current_time() {
-	echo "$(date +"%H:%M")"
+	echo $(date +"%T")
 }
 
 ram_usage() {
-	ram_used=$(free | awk 'NR==2{printf "%.0f\n", $3/$2*10}')
-	echo $(printf '█%.0s' $(seq 1 $ram_used))$(printf '░%.0s' $(seq $ram_used 8))
+	ram_used=$(free | awk 'NR==2{printf "%.0f\n", $3/$2*30}')
+	echo $(printf '█%.0s' $(seq 1 $ram_used))$(printf '░%.0s' $(seq $ram_used 30))
 }
 
-updates_available() { 
-	echo "$(xbps-install -Mun | awk "END {print NR}") updates"
+packages_installed() { 
+	echo $(qlist -I | awk "END {print NR}")
 }
 
 cpu_temperature() {
-	echo " $(awk '{printf "%.0f\n", $1/1000}' /sys/devices/platform/eeepc-wmi/hwmon/hwmon3/subsystem/hwmon2/temp1_input)°C"
+	echo "$(awk '{printf "%.0f\n", $1/1000}' /sys/class/thermal/thermal_zone0/temp)°C"
 } 
+
+kernel() {
+	echo "$(uname -r)"
+}
 
 wifi_bars() {
 	wifi_signal=$(iw dev wlp5s0 station dump | grep signal: | awk '{print $2*-1}')
@@ -42,4 +46,14 @@ wifi_bars() {
 	echo $wifi
 }
 
-echo "$(updates_available) $(cpu_temperature) $(year_and_date) $(current_time) $(ram_usage) $(wifi_bars) "
+vpn() {
+	vpn=$(ip a | grep wg | awk 'NR==1{printf "%s\n", $2}' | cut -c 1-13)
+	
+	if [ -z $vpn ]; then
+		echo "Not Connected"
+	else
+		echo "$vpn"
+	fi
+}
+
+echo "$(cpu_usage) $(ram_usage) 🐧 $(kernel) 📦 $(packages_installed) 🖥 $(cpu_temperature) 🗓 $(todays_date) 🕘 $(current_time) 🌐 $(vpn) $(wifi_bars)"
